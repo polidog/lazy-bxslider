@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="bxslider/jquery.bxslider.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <div class="container">
+      <h2>bxSlider Lazy load sample</h2>
+
+      <ul class="bxslider">
+        <li><img src="images/sample1.jpg" class="img-responsive lazy" /></li>
+        <li><img data-src="images/sample2.jpg" class="img-responsive lazy" /></li>
+        <li><img data-src="images/sample3.jpg" class="img-responsive lazy" /></li>
+        <li><img data-src="images/sample4.jpg" class="img-responsive lazy" /></li>
+        <li><img data-src="images/sample5.jpg" class="img-responsive lazy" /></li>
+        <li><img data-src="images/sample6.jpg" class="img-responsive lazy" /></li>
+      </ul>
+
+      <div class="bx-pager">
+        <div class="row">
+          <div class="col-xs-2">
+            <a href="#" data-slide-index="0"><img class="img-responsive img-circle" src="images/th-sample1.jpg" /></a>
+          </div>
+          <div class="col-xs-2">
+            <a href="#" data-slide-index="1"><img class="img-responsive img-circle" src="images/th-sample2.jpg" /></a>
+          </div>
+          <div class="col-xs-2">
+            <a href="#" data-slide-index="2"><img class="img-responsive img-circle" src="images/th-sample3.jpg" /></a>
+          </div>
+          <div class="col-xs-2">
+            <a href="#" data-slide-index="3"><img class="img-responsive img-circle" src="images/th-sample4.jpg" /></a>
+          </div>
+          <div class="col-xs-2">
+            <a href="#" data-slide-index="4"><img class="img-responsive img-circle" src="images/th-sample5.jpg" /></a>
+          </div>
+          <div class="col-xs-2">
+            <a href="#" data-slide-index="5"><img class="img-responsive img-circle" src="images/th-sample6.jpg" /></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <script src="bxslider/jquery-3.1.1.min.js"></script>
+    <script src="bxslider/jquery.bxslider.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+      $(function(){
+        $('.bxslider').bxSlider({
+          mode: 'fade',
+          auto: true,
+          speed: 1000,
+          pause: 4000,
+          controls: true,
+          pagerCustom: '.bx-pager',
+          onSlideBefore: function(e) {
+            $($(e[0]).find('.lazy')).each(function(index,value){
+              var $target = $(value);
+              $target.attr('src', $target.data('src'))
+              $target.removeClass('lazy')
+            });
+          }
+        });
+      });
+    </script>
+
+  </body>
+</html>
